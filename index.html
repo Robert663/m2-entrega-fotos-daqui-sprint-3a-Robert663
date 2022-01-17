@@ -4,11 +4,28 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./src/css/reset.css">
+    <link rel="stylesheet" href="./src/css/style.css">
     <title>Fotos Daqui</title>
 </head>
 <body>
-
-    <h1>Fotos Daqui</h1>
+    <header>
+        <label for="term">
+            <p>Pesquisar por: </p>
+            <input type="text" placeholder="Digite aqui o termo de busca" id="text">
+            <button id = 'submit'>Pesquisar</button>
+        </label>
+    </header>
+    <h1>Fotos daqui</h1>
+    <div id = "arrows">
+        <button id = 'left'>  &#8592;</button>
+        <button id = 'right'> &#8594;</button>
+    </div>
+    <div id = 'fotos'></div>
+    <div id = 'title'>
+        <span id = 'span'></span>
+    </div>
+    <script src="/src/js/script.js"></script>
     
 </body>
 </html>
