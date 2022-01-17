@@ -13,20 +13,21 @@ let i = 0;
 let imageUrl = '';
 let lati = 0;
 let long = 0;
-navigator.geolocation.getCurrentPosition(coord => {
-  lati = coord.coords.latitude
-  long = coord.coords.longitude
+navigator.geolocation.getCurrentPosition(async coord => {
+  lati = await coord.coords.latitude
+  long = await coord.coords.longitude
 }, function(error) {
   if (error.code == error.PERMISSION_DENIED)
     lati = 46.2276;
     long = 2.2137;
-});
-submit.addEventListener('click', async function pegarImagens(){
-// async function pegarImagens(){
-  receiveTargert = [];
-  const response = await fetch(`https://shrouded-mountain-15003.herokuapp.com/https://flickr.com/services/rest/?api_key=cd406997f2df05b6ab9986a59e489201&format=json&nojsoncallback=1&method=flickr.photos.search&safe_search=1&per_page=5&lat=${lati}&lon=${long}&text=${textValue.value}`)
-  .then(response => response.json())
-  .then(data => {
+  });
+
+  async function pegarImagens(){
+    receiveTargert = [];
+    title = [];
+    const response = await fetch(`https://shrouded-mountain-15003.herokuapp.com/https://flickr.com/services/rest/?api_key=cd406997f2df05b6ab9986a59e489201&format=json&nojsoncallback=1&method=flickr.photos.search&safe_search=1&per_page=5&lat=${lati}&lon=${long}&text=${textValue.value}`)
+    .then(response => response.json())
+    .then(data => {
     function constructImageURL(photoObj) {
       return "https://farm" + photoObj.farm +
       ".staticflickr.com/" + photoObj.server +
@@ -34,12 +35,13 @@ submit.addEventListener('click', async function pegarImagens(){
     }
     for(let i = 0; i < data.photos.photo.length; i++){
       imageUrl = constructImageURL(data.photos.photo[i]);
+      console.log(imageUrl)
       receiveTargert.push(imageUrl);
       title.push(data.photos.photo[i].title);
     }
   })
   foto.src = imageUrl;
-})
+}
 
 right.addEventListener('click', (e) =>{
   foto.src = receiveTargert[num];
@@ -59,3 +61,5 @@ right.addEventListener('click', (e) =>{
   })
 fotos.appendChild(foto);
 spanTitle.appendChild(getTitle);
+pegarImagens();
+submit.addEventListener('click', pegarImagens);
