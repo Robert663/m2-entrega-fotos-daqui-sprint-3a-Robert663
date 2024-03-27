@@ -25,7 +25,7 @@ navigator.geolocation.getCurrentPosition(async coord => {
   async function pegarImagens(){
     receiveTargert = [];
     title = [];
-    const response = await fetch(`https://shrouded-mountain-15003.herokuapp.com/https://flickr.com/services/rest/?api_key=cd406997f2df05b6ab9986a59e489201&format=json&nojsoncallback=1&method=flickr.photos.search&safe_search=1&per_page=5&lat=${lati}&lon=${long}&text=${textValue.value}`)
+    const response = await fetch(`https://flickr.com/services/rest/?api_key=59d327ff8039735964bc8de64b11218c&format=json&nojsoncallback=1&method=flickr.photos.search&safe_search=1&per_page=5&lat=${lati}&lon=${long}&text=${textValue.value}`)
     .then(response => response.json())
     .then(data => {
     function constructImageURL(photoObj) {
